@@ -53,20 +53,26 @@ window.addEventListener("DOMContentLoaded", async () => {
     build("div", "myMovies__nowShowing", ".myMovies")
 
     nowPlayingMovieData.results.forEach(async (element, index) => {
-
     
         // myMovies__nowShowing__movie
         const nowShowingWrapper = document.querySelector(".myMovies__nowShowing")
         const myMovies__nowShowing__movie = document.createElement("div")
         myMovies__nowShowing__movie.classList.add("myMovies__nowShowing__movie")
         myMovies__nowShowing__movie.setAttribute("id", element.id)
-        // build("div", "myMovies__nowShowing__movie", ".myMovies__nowShowing")
         nowShowingWrapper.append(myMovies__nowShowing__movie)
 
+
         // myMovies__nowShowing__movie__imgBox
-        build("div", "myMovies__nowShowing__movie__imgBox", ".myMovies__nowShowing__movie", `
-            <img src="${imgPath + element.poster_path}" alt="${element.title}">
-        `, index)
+        const imgBox = document.createElement("div")
+        imgBox.classList.add("myMovies__nowShowing__movie__imgBox")
+        imgBox.innerHTML = `
+            <img src="/image/tempPicture.jpg" alt="${element.title}">
+        `
+        myMovies__nowShowing__movie.append(imgBox)
+        // build("div", "myMovies__nowShowing__movie__imgBox", ".myMovies__nowShowing__movie", `
+        //     <img src="${imgPath + element.poster_path}" alt="${element.title}">
+        // `, index)
+
 
         // myMovies__nowShowing__movie__details
         build("div", "myMovies__nowShowing__movie__details", ".myMovies__nowShowing__movie", `
@@ -76,6 +82,16 @@ window.addEventListener("DOMContentLoaded", async () => {
                 <p>${element.vote_average + "/10 IMDb"}</p>
             </div>
         `, index)
+
+
+        // Lazy Loading
+        const imageToChange = imgBox.querySelector("img")
+        const tempImg = new Image
+        tempImg.src = imgPath + element.poster_path
+
+        tempImg.onload = () => {
+            imageToChange.src = tempImg.src
+        }
 
         // console.log(element.vote_average)
     })
@@ -105,6 +121,7 @@ window.addEventListener("DOMContentLoaded", async () => {
         myMovies__popular.setAttribute("id", element.id)
         wrapper.append(myMovies__popular)
 
+        // ${imgPath + element.poster_path}
         // myMovies__popular__imgBox
         build("div", "myMovies__popular__imgBox", ".myMovies__popular", `
             <img src="${imgPath + element.poster_path}" alt="${element.title}">      
@@ -130,7 +147,7 @@ window.addEventListener("DOMContentLoaded", async () => {
         const singleMovie = await fetch(singleMovieURL)
         const singleMovieData = await singleMovie.json()
         // console.log(singleMovieData)
-        
+
         singleMovieData.genres.forEach((genre, index) => {
             if (index < 3) {
                 build("p", "myMovies__popular__details__genre__p", ".myMovies__popular__details__genre", `
@@ -283,9 +300,13 @@ window.addEventListener("DOMContentLoaded", async () => {
             wrapper.append(myMovies__popular)
 
             // myMovies__popular__imgBox
-            build("div", "myMovies__popular__imgBox", ".myMovies__popular", `
-                <img src="${imgPath + element.poster_path}" alt="${element.title}">      
-            `, indexOne)
+            const newImgBox = document.createElement("div")
+            newImgBox.classList.add("myMovies__popular__imgBox")
+            newImgBox.innerHTML = `
+                <img src="/image/tempPicture.jpg" alt="${element.title}">
+            `
+            myMovies__popular.append(newImgBox)
+
             // myMovies__popular__details
             build("div", "myMovies__popular__details", ".myMovies__popular", "", indexOne)
             // myMovies__popular__details__title
@@ -327,6 +348,18 @@ window.addEventListener("DOMContentLoaded", async () => {
                 <i class="fa-regular fa-clock"></i>
                 <p>${runTimeInHours + "h " + runTimeMinutesLeft + "m"}</p>
             `, indexOne)
+
+
+            const imageToChange = newImgBox.querySelector("img")
+            // Lazy Loading
+            const tempImage = new Image
+            tempImage.src = imgPath + element.poster_path
+            // When loading is done
+            tempImage.onload = () => {
+                imageToChange.src = tempImage.src
+            }
+
+
         })
 
 
