@@ -9,6 +9,10 @@ window.addEventListener("DOMContentLoaded", async () => {
     const nowPlayingURL = `https://api.themoviedb.org/3/movie/now_playing?api_key=${apiKey}&language=en-US&page=1`
     const movieGenre = `https://api.themoviedb.org/3/genre/movie/list?api_key=${apiKey}&language=en-US`
     
+
+    
+
+
     // Popular movies
     const popularMovie = await fetch(popularURL)
     const jsonPopularMovieData = await popularMovie.json()
@@ -22,7 +26,7 @@ window.addEventListener("DOMContentLoaded", async () => {
     const genreAPI = await fetch(movieGenre)
     const genreData = await genreAPI.json()
 
-    // console.log(nowPlayingMovieData)
+    console.log(popularMovieData)
     
     
     
@@ -292,7 +296,7 @@ window.addEventListener("DOMContentLoaded", async () => {
             const wrapper = document.querySelector(".myMovies__popular__wrapper")
             const currentShowingNodeList = document.querySelectorAll(".myMovies__popular")
             const indexOne = currentShowingNodeList.length
-            // console.log(lastOfCurrentShowingNodeList)
+
             const myMovies__popular = document.createElement("div")
             myMovies__popular.classList.add("myMovies__popular")
             myMovies__popular.addEventListener("click", goToPage)
