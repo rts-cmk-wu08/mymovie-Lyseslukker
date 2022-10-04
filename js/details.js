@@ -124,19 +124,6 @@ window.addEventListener("DOMContentLoaded", async () => {
             return
         }
     })
-
-
-
-    
-    
-    // TEST DARKMODE
-    // const stylesheetOne = document.querySelector("#styleOne")
-    // stylesheetOne.disabled = true;
-
-    // setTimeout(() => {
-    //     stylesheetOne.disabled = false;
-    //     const stylesheetTwo = document.querySelector("#styleTwo").disabled = true
-    // }, 5000)
     
     
     // DARKMODE

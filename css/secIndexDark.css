@@ -1,0 +1,52 @@
+body {
+    background-color: black;
+    color: white;
+}
+p, h1, h2, h3 {
+    color: white;
+}
+
+.nowShowing__movies__movie {
+    box-shadow: 5px 5px 25px -15px white;
+}
+
+
+
+
+.popular__movies__card__info__genres>div {
+    background-color: black;
+    color: white;
+    box-shadow: 0px 0px 3px 0px white;
+}
+.popular__movies__card {
+    opacity: 0;
+    transform: translateX(-75px);
+    transition: 150ms;
+}
+.popular__movies__card.show {
+    opacity: 1;
+    transform: translateX(0px);
+    box-shadow: -10px 0px 25px -15px white;
+}
+
+
+
+
+
+nav {
+    background-color: black;
+}
+
+
+
+
+.slider:before {
+    background-color: white;
+}
+input:checked + .slider {
+    background-color: black;
+    box-shadow: 0 0 5px white;
+}
+input:focus + .slider {
+    /* box-shadow: 0 0 5px white; */
+}
